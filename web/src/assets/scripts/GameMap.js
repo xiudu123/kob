@@ -13,6 +13,7 @@ export class GameMap extends AcGameObject{
         this.cols = 14;
 
         this.inner_walls_count = parseInt(80 * Math.random());
+        // this.inner_walls_count = 20;
         this.walls = [];
 
         this.snakes = [
@@ -48,7 +49,7 @@ export class GameMap extends AcGameObject{
              g[r][0] = g[r][this.cols - 1] = true;
         }
 
-        for(let c = 1; c < this.cols - 1; ++ c){
+        for(let c = 0; c < this.cols; ++ c){
             g[0][c] = g[this.rows - 1][c] = true;
         }
 
@@ -132,7 +133,7 @@ export class GameMap extends AcGameObject{
                 -- k;
             }
             for(let i = 0; i < k; ++ i){
-                if(snake.cells[i].r === cell.c && snake.cells[i].c === cell.c){
+                if(snake.cells[i].r === cell.r && snake.cells[i].c === cell.c){
                     return false;
                 }
             }

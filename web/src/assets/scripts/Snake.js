@@ -90,7 +90,7 @@ export class Snake extends AcGameObject {
 
             if( !this.check_tail_increasing()){
                 const k = this.cells.length;
-                const tail = this.cells[k - 1], tail_target = this.cells[k - 1];
+                const tail = this.cells[k - 1], tail_target = this.cells[k - 2];
                 const tail_dx = tail_target.x - tail.x;
                 const tail_dy = tail_target.y - tail.y;
                 tail.x += move_distance * tail_dx / distance;
