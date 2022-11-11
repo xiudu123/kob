@@ -85,11 +85,35 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  // if(to.meta.requestAuth && !store.state.user.is_login){
+  //   next({name: "user_account_login"})
+  // }else{
+  //   next();
+  // }
+  let flag = 1;
+  const jwt_token = localStorage.getItem("jwt_token");
+
+  if(jwt_token){
+    store.commit("updateToken", jwt_token);
+    store.dispatch("getinfo", {
+      success(){
+
+      },
+      error(){
+        alert("请重新登录");
+        router.push({name: 'user_account_login'});
+      }
+    })
+  }else flag = 2;
+
   if(to.meta.requestAuth && !store.state.user.is_login){
-    next({name: "user_account_login"})
-  }else{
-    next();
-  }
+    console.log(flag);
+    if(flag === 1) next();
+    else {
+      alert("请登录");
+      next({name:"user_account_login"});
+    }
+  }else next();
 })
 
 
